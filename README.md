@@ -1,3 +1,5 @@
-My solutions in Python to Eric Wastl's Advent of Code challenge.
+#Advent of Code 2015
 
-Try it for yourself at http://adventofcode.com/ !
+My solutions in Python to Eric Wastl's coding challenge.
+
+Try it for yourself at http://adventofcode.com/!
