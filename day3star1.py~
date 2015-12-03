@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+import sys
+
+# main: this is the main function of this Python
+#
+def main(argv):
+
+    # Define the input file name from which to read the parentheses
+    # I really need a way of defining this that isn't hardcoding
+    filename="day3star1.txt"
+    
+    # Try to open the file and read each line. Split up each line using the x as a token
+    # to separate out the length, width, and height. Convert the line length, width, and height
+    # to integers and call the getWrappingPaperArea function to obtain the required wrapping
+    # paper area for each present.
+    try:
+        with open(filename) as f:
+            for line in f:
+                # Read in 1 byte at a time
+                while True:
+                    c = f.read(1)
+
+
+
+            print("Result" %(sum))
+            
+        # Print out the total wrapping paper needed
+        #print("The elves need %d square feet of wrapping paper" %(sum))
+        
+    except IOError:
+        print("ERROR >> Missing file day2star1.txt")
+
+    return
+
+
+# begin gracefully
+#
+if __name__ == "__main__":
+    main(sys.argv[0:])
+
+#
+# end of file
