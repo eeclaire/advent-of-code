@@ -37,9 +37,7 @@ def count_safe_reports(reports: list[list[int]]) -> int:
         if check_safe_levels(report):
             safe_reports += 1
 
-    return safe_reports
-
-
+    return safe_rep
 def day_two():
     reports = list(read_reports('./inputs/2024-12-02.csv'))
     safe_reports = count_safe_reports(reports)

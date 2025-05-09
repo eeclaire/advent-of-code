@@ -1,0 +1,32 @@
+name: Testing Deployment
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: {} # Allows you to manually trigger this workflow from the Actions tab
+jobs:
+  setup-environment:
+    name: Setup Basic Environment Variables
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.determine-environment.outputs.tag }}
+      target_env: ${{ steps.determine-environment.outputs.target_env }}
+    steps:
+      - name: Determine environment
+        id: determine-environment
+        run: |
+          echo "${{ github.event.action }}"
+          SHORT_SHA=$(echo ${{github.sha}} | cut -c 1-7)
+          TAG=$(echo ${{github.ref}} | sed -n 's/refs\/tags\///p')
+          BRANCH=$(echo ${{github.ref}} | sed -n 's/refs\/heads\///p')
+          # double brackets are used for pattern matching
+          if [[ $TAG == v* ]]; then
+            echo "tag=prod-$TAG" >> $GITHUB_OUTPUT
+            echo "target_env=prod" >> $GITHUB_OUTPUT
+          elif [ $BRANCH == main ]; then
+            echo "tag=staging-$SHORT_SHA" >> $GITHUB_OUTPUT
+            echo "target_env=staging" >> $GITHUB_OUTPUT
+          else
+            echo "target_env=dev" >> $GITHUB_OUTPUT
+            echo "tag=dev-$SHORT_SHA" >> $GITHUB_OUTPUT
+          fi
